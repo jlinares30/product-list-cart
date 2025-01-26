@@ -1,7 +1,10 @@
 @import "tailwindcss";
 
+.modalBG{
+    @apply fixed inset-0 bg-gray-800/55 
+}
 .modalContainer{
-    @apply bg-[var(--Rose-50)] w-115 rounded-2xl p-5 text-black
+    @apply bg-[var(--Rose-50)] w-115 rounded-2xl  p-5 text-black absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
 }
 .svgSuccess{
     @apply w-12 h-12 mb-5
