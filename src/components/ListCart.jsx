@@ -14,9 +14,10 @@ function ListCart() {
                     <div className={styles.price}>$28.00</div>
                 </div>
             </div>
-            <div>
-                <button>Remove</button>
+            <div className={styles.removeBtn}>
+                <img className={styles.svgRemove} src="src/images/icon-remove-item.svg" alt="icon remove" />
             </div>
+            <hr className={styles.divider} />
         </li>
       </ul>
       <div className={styles.totalContainer}>
@@ -24,6 +25,10 @@ function ListCart() {
         <p className={styles.totalPrice}>$46.50</p>
       </div>
       <button className={styles.confirmBtn}>Confirm Order</button>
+      {/* <div className={styles.emptyCart}>
+        <img className={styles.imageEmptyCart} src="src/images/illustration-empty-cart.svg" alt="empty cart image" />
+        <h3 className={styles.emptyTitle}>Your added items will appear here</h3>
+      </div> */}
     </div>
   );
 }

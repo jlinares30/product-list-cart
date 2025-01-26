@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+.modalContainer{
+    @apply bg-[var(--Rose-50)] w-115 rounded-2xl p-5 text-black
+}
+.svgSuccess{
+    @apply w-12 h-12 mb-5
+}
+.descriptionConfirm{
+    @apply text-base font-extralight mb-7 mt-2
+}
+.confirmTitle{
+    @apply text-4xl font-bold 
+}
+.listContainer{
+    @apply bg-[var(--Rose-100)] p-5 rounded-lg
+}
+.cartItem{
+    @apply flex relative justify-between items-center h-15 mb-3
+}
+.productContainer{
+    @apply flex items-center
+}
+.imageProduct{
+    @apply w-10 h-10 rounded-md mr-3
+}
+.nameProduct{
+    @apply text-base font-semibold 
+}
+.infoContainer{
+    @apply flex
+}
+.quantity{
+    @apply text-[var(--Red)] font-semibold mr-3
+}
+.priceUnid{
+    @apply text-base font-extralight
+}
+.price{
+    @apply text-base font-semibold
+}
+.divider{
+    @apply absolute w-full h-0.5 -bottom-2 border-gray-300
+}
+.totalContainer{
+    @apply flex justify-between mt-7
+}
+.totalPrice{
+    @apply text-lg font-black
+}
+
+.confirmBtn{
+    @apply cursor-pointer bg-[var(--Red)] p-3 rounded-3xl w-full my-5 text-[var(--Rose-50)]
+}               
