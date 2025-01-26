@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+.cardContainer{
+    @apply bg-[var(--Rose-100)] rounded-lg text-black;
+}
+
+.productImgContainer{
+    @apply relative text-center;
+}
+.productImage{
+    @apply w-full h-64 rounded-lg;
+}
+
+.addCartBtn{
+    @apply absolute border-1 w-40 border-[var(--Red)] font-semibold bg-[var(--Rose-50)] hover:text-[var(--Red)] rounded-full px-4 py-2 -bottom-5 right-1/5 cursor-pointer flex justify-between;
+}
+
+.svgUpDown{
+    @apply w-6 h-6 ;
+}
+
+.svgCart{
+    @apply w-6 h-6 inline-block mr-2;
+}
+
+.category{
+    @apply text-sm text-gray-500 mt-8;
+}
+
+.nameProduct{
+    @apply text-lg font-semibold;
+}
+
+.price{
+    @apply text-lg font-bold text-[var(--Red)];
+}
