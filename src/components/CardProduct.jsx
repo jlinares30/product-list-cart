@@ -3,12 +3,10 @@ import { useContext, useEffect, useState } from 'react';
 import { CartContext } from '../context/CartContext';
 
 function CardProduct({category, nameProduct, price, image, product}) {
-  const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [quantity, setQuantity] = useState(product.quantity);
   const {addToCart, removeFromCart, isInCart } = useContext(CartContext);
   
   const toggleAddToCart = () => {
-    setIsAddedToCart(!isAddedToCart);
     addToCart(product);
     setQuantity(1);
   }
@@ -22,16 +20,12 @@ function CardProduct({category, nameProduct, price, image, product}) {
       setQuantity(quantity - 1);
       removeFromCart(product.id);
   } else {
-      setIsAddedToCart(false);
       removeFromCart(product.id);
   }
   }
   const togglePlus = () => {
     setQuantity(quantity + 1);
     addToCart(product);
-    if (!isAddedToCart) {
-      setIsAddedToCart(true);
-  }
   }
 
   return (

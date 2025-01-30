@@ -3,7 +3,13 @@ import { createContext, useState, useEffect } from "react";
 const CartContext = createContext();
 function CartProvider({ children }) {
     const [cart, setCart] = useState([]);
+    const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
+    const [totalPrice, setTotalPrice] = useState(0);
     const isInCart = (id) => cart.some((product) => product.id === id);
+
+    const toggleCheckoutModal = () => {
+        setIsCheckoutModalOpen((prev) => !prev);
+    }
 
     const addToCart = (item) => {
         setCart((prevCart)=>{
@@ -16,8 +22,13 @@ function CartProvider({ children }) {
         })
     }
     useEffect(() => {
+        let total = 0;
+        cart.forEach(product => {
+        total += product.price * product.quantity;
+        });
+        setTotalPrice(total);
         console.log("Carrito actualizado:", cart);
-      }, [cart]);
+    }, [cart]);
     
     
     
@@ -28,7 +39,7 @@ function CartProvider({ children }) {
                 if (cartItem.quantity > 1) {
                     updatedCart.push({ ...cartItem, quantity: cartItem.quantity - 1 });
                 } 
-                // Si la cantidad es 1, simplemente lo excluye (no lo agrega a updatedCart)
+               
             } else {
                 updatedCart.push(cartItem);
             }
@@ -41,7 +52,7 @@ function CartProvider({ children }) {
             return prevCart.filter(cartItem => cartItem.id !== id)
         })
     }
-    const value = {cart, addToCart, removeFromCart, removeAllFromCart, isInCart};
+    const value = {cart, addToCart, removeFromCart, removeAllFromCart, isInCart, toggleCheckoutModal, isCheckoutModalOpen, totalPrice};
     return (
         <CartContext.Provider value={value}>
         {children}

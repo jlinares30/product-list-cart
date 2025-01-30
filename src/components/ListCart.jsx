@@ -3,20 +3,10 @@ import { useContext, useState, useEffect } from 'react';
 import { CartContext } from '../context/CartContext';
 
 function ListCart() {
-  const {cart, removeAllFromCart } = useContext(CartContext);
-  const [isAddedToCart, setIsAddedToCart] = useState(false);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const {cart, removeAllFromCart, toggleCheckoutModal, totalPrice } = useContext(CartContext);
 
-  useEffect(() => {
-    let total = 0;
-    cart.forEach(product => {
-      total += product.price * product.quantity;
-    });
-    setTotalPrice(total);
-  }, [cart]);
 
   const toggleRemove = (id) => {
-    setIsAddedToCart(!isAddedToCart);
     removeAllFromCart(id);
   }
 
@@ -47,7 +37,7 @@ function ListCart() {
         <p className={styles.orderTotal}>Order Total</p>
         <p className={styles.totalPrice}>${totalPrice.toFixed(2)}</p>
       </div>
-      <button className={styles.confirmBtn}>Confirm Order</button>
+      <button className={styles.confirmBtn} onClick={toggleCheckoutModal}>Confirm Order</button>
       </>) :
         (<div className={styles.emptyCart}>
           <img className={styles.imageEmptyCart} src="src/images/illustration-empty-cart.svg" alt="empty cart image" />

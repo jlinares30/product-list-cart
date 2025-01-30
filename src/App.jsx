@@ -1,16 +1,17 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import CardProduct from './components/CardProduct'
 import ListCart from './components/ListCart'
 import ModalOrderCard from './components/ModalOrderCard'
 import './App.css'
 import data from './data.json'
+import { CartContext } from './context/CartContext'
 
 function App() {
   const initializedData = data.map(product => ({
       ...product,
       quantity: 0
   }))
-
+  const {isCheckoutModalOpen} = useContext(CartContext)
   return (
     <div className="App relative flex max-md:flex-col">
       <main className='mr-10'>
@@ -25,7 +26,7 @@ function App() {
       <aside className=''>
         <ListCart/>
       </aside>
-      {/* <ModalOrderCard /> */}
+      {isCheckoutModalOpen && <ModalOrderCard />}
     </div>
   )
 }
