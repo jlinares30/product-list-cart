@@ -14,10 +14,10 @@ function ListCart() {
     });
     setTotalPrice(total);
   }, [cart]);
-  
-  const toggleRemove = () => {
+
+  const toggleRemove = (id) => {
     setIsAddedToCart(!isAddedToCart);
-    removeAllFromCart(product.id);
+    removeAllFromCart(id);
   }
 
   return (
@@ -36,7 +36,7 @@ function ListCart() {
                     <div className={styles.price}>${(product.quantity*product.price).toFixed(2)}</div>
                 </div>
             </div>
-            <div className={styles.removeBtn} onClick={toggleRemove}>
+            <div className={styles.removeBtn} onClick={()=>toggleRemove(product.id)}>
                 <img className={styles.svgRemove} src="src/images/icon-remove-item.svg" alt="icon remove" />
             </div>
             <hr className={styles.divider} /> 

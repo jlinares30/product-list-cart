@@ -3,6 +3,7 @@ import { createContext, useState, useEffect } from "react";
 const CartContext = createContext();
 function CartProvider({ children }) {
     const [cart, setCart] = useState([]);
+    const isInCart = (id) => cart.some((product) => product.id === id);
 
     const addToCart = (item) => {
         setCart((prevCart)=>{
@@ -17,7 +18,9 @@ function CartProvider({ children }) {
     useEffect(() => {
         console.log("Carrito actualizado:", cart);
       }, [cart]);
-
+    
+    
+    
     const removeFromCart = (id) => {
         setCart((prevCart) =>
         prevCart.reduce((updatedCart, cartItem) => {
@@ -38,7 +41,7 @@ function CartProvider({ children }) {
             return prevCart.filter(cartItem => cartItem.id !== id)
         })
     }
-    const value = {cart, addToCart, removeFromCart, removeAllFromCart};
+    const value = {cart, addToCart, removeFromCart, removeAllFromCart, isInCart};
     return (
         <CartContext.Provider value={value}>
         {children}

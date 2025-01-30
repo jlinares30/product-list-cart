@@ -5,7 +5,7 @@ import { CartContext } from '../context/CartContext';
 function CardProduct({category, nameProduct, price, image, product}) {
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [quantity, setQuantity] = useState(product.quantity);
-  const {addToCart, removeFromCart } = useContext(CartContext);
+  const {addToCart, removeFromCart, isInCart } = useContext(CartContext);
   
   const toggleAddToCart = () => {
     setIsAddedToCart(!isAddedToCart);
@@ -38,7 +38,7 @@ function CardProduct({category, nameProduct, price, image, product}) {
     <div className={styles.cardContainer}>
         <div className={styles.productImgContainer}>
           <img className={styles.productImage} src={image} alt="Product"/>
-          {!isAddedToCart ? 
+          {!isInCart(product.id) ? 
           ( <button className={styles.addCartBtn} onClick={toggleAddToCart}>
             <img className={styles.svgCart} src="src/images/icon-add-to-cart.svg" alt="Product"/>
             <p>Add to Cart</p>
