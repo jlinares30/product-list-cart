@@ -1,34 +1,59 @@
 import styles from '../styles/ListCart.module.css';
+import { useContext, useState, useEffect } from 'react';
+import { CartContext } from '../context/CartContext';
 
 function ListCart() {
+  const {cart, removeAllFromCart } = useContext(CartContext);
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    let total = 0;
+    cart.forEach(product => {
+      total += product.price * product.quantity;
+    });
+    setTotalPrice(total);
+  }, [cart]);
+  
+  const toggleRemove = () => {
+    setIsAddedToCart(!isAddedToCart);
+    removeAllFromCart(product.id);
+  }
+
   return (
     <div className={styles.cartListContainer}>
-      <h2 className={styles.quantityTitle}>Your Cart (4)</h2>
+      <h2 className={styles.quantityTitle}>Your Cart ({cart.length})</h2>
+      {cart.length !== 0 ?(
+      <>
       <ul className={styles.cartList}>
-        <li className={styles.cartItem}>
+        {cart.map((product) => (
+          <li className={styles.cartItem}>
             <div>
-                <p className={styles.nameProduct}>Classic Tiramisu</p>
+                <p className={styles.nameProduct}>{product.name}</p>
                 <div className={styles.infoContainer}>
-                    <div className={styles.quantity}>4x</div>
-                    <div className={styles.priceUnid}>@ $7.00</div>
-                    <div className={styles.price}>$28.00</div>
+                    <div className={styles.quantity}>{product.quantity}x</div>
+                    <div className={styles.priceUnid}>@ ${product.price.toFixed(2)}</div>
+                    <div className={styles.price}>${(product.quantity*product.price).toFixed(2)}</div>
                 </div>
             </div>
-            <div className={styles.removeBtn}>
+            <div className={styles.removeBtn} onClick={toggleRemove}>
                 <img className={styles.svgRemove} src="src/images/icon-remove-item.svg" alt="icon remove" />
             </div>
-            <hr className={styles.divider} />
-        </li>
+            <hr className={styles.divider} /> 
+          </li>
+        ))}
       </ul>
       <div className={styles.totalContainer}>
         <p className={styles.orderTotal}>Order Total</p>
-        <p className={styles.totalPrice}>$46.50</p>
+        <p className={styles.totalPrice}>${totalPrice.toFixed(2)}</p>
       </div>
       <button className={styles.confirmBtn}>Confirm Order</button>
-      {/* <div className={styles.emptyCart}>
-        <img className={styles.imageEmptyCart} src="src/images/illustration-empty-cart.svg" alt="empty cart image" />
-        <h3 className={styles.emptyTitle}>Your added items will appear here</h3>
-      </div> */}
+      </>) :
+        (<div className={styles.emptyCart}>
+          <img className={styles.imageEmptyCart} src="src/images/illustration-empty-cart.svg" alt="empty cart image" />
+          <h3 className={styles.emptyTitle}>Your added items will appear here</h3>
+        </div>)}
+    
     </div>
   );
 }
